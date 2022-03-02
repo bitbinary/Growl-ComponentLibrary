@@ -7,7 +7,8 @@
 ## Install
 
 ```bash
-npm install --save growl-jd
+npm install --save growl-jd 
+// Not yet uploaded to npm
 ```
 
 ## Usage
@@ -15,12 +16,25 @@ npm install --save growl-jd
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'growl-jd'
+import { GrowlComponent, useGrowl } from 'growl-jd'
 import 'growl-jd/dist/index.css'
 
 class Example extends Component {
   render() {
-    return <MyComponent />
+    const [active, setActive] = useGrowl()
+    return (
+      <div>
+      // setActive functions accepts the state and the timeout value for the growl.
+        <button onClick={() => void setActive(true, 1000)}>
+          Clik here to activate the growl
+        </button>
+        <GrowlComponent
+          onDismissed={() => setActive(false)}
+          active={active}
+          message='Hello World!'
+        />
+      </div>
+    )
   }
 }
 ```
